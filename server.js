@@ -22,6 +22,20 @@ app.get("/dogs", async (req, res) => {
   }
 });
 
+app.get("/dogs/:id", async (req, res) => {
+  try {
+    const dog = await prisma.dogs.findUnique({
+      where: { id: parseInt(req.params.id) },
+    });
+    if (!dog) {
+      return res.status(404).json({ error: "Dog not found" });
+    }
+    res.json(dog);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch dog" });
+  }
+});
+
 app.post("/dogs", validateDog, async (req, res) => {
   const { name, breed, age } = req.body;
 
