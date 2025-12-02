@@ -1,4 +1,4 @@
-const dogSchema = require("../schema/dogSchema");
+const dogSchema = require("../schema/dogSchema.js");
 
 const validateDog = (req, res, next) => {
   const { error } = dogSchema.validate(req.body);
