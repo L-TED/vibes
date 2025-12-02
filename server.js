@@ -1,14 +1,14 @@
 const express = require("express");
 const cors = require("cors");
 const validateDog = require("./middleware/dogMiddleware.js");
+const { dogs, dogId: initialDogId } = require("./data/dogs.js");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-let dogs = [];
-let dogId = 1;
+let dogId = initialDogId;
 
 // Routes
 app.get("/", (req, res) => {
